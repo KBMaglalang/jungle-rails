@@ -1,2 +1,30 @@
-<h1>Admin::Dashboard#show</h1>
-<p>Find me in app/views/admin/dashboard/show.html.erb</p>
+<h1>Dashboard</h1>
+
+<div class="panel panel-default">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th colspan="2">eCommerce Products</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Products Available:
+        </td>
+        <td class="expand">
+          <%= link_to  @products_count, admin_products_path %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Categories Available:
+        </td>
+        <td>
+          <%= @categories_count %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
