@@ -15,13 +15,13 @@ Rails.application.routes.draw do
 
   resources :orders, only: [:create, :show]
   resources :about, only: [:index]
-  # resources :users, only: [:new, :create]
-  get '/signup' => 'users#new'
-  post '/users' => 'users#create'
+  
+  get '/signup', to: 'users#new'
+  post '/users', to: 'users#create'
 
-  get '/login' => 'sessions#new'
-  post '/login' => 'sessions#create'
-  get '/logout' => 'sessions#destroy'
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  get '/logout', to: 'sessions#destroy'
 
 
   namespace :admin do
