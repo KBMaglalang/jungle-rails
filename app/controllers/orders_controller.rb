@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
 
+  before_action :authorize
+
   def show
     @order = Order.find(params[:id])
     @order_list = @order.line_items
