@@ -46,6 +46,24 @@
         </li> %>
       </ul>
       <ul class="navbar-nav">
+        <li class="nav-item">
+          <% if current_user %>
+            <li class="nav-item">
+              <%= label("user", "username:", "Signed in as: #{current_user.first_name}", class: "nav-link text-white") %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Logout", '/logout', class: "nav-link text-danger" %>
+            </li>
+          <% else %>
+          <li class="nav-item">
+            <%= link_to 'Login', '/login', class: "nav-link text-white" %> 
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Signup', '/signup', class: "nav-link text-white" %>
+          </li>
+          <% end %>
+        </li>
+
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle text-danger"
