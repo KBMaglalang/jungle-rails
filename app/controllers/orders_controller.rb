@@ -1,11 +1,13 @@
 class OrdersController < ApplicationController
-
-  # before_action :authorize
-
   def show
     @order = Order.find(params[:id])
-    @order_list = @order.line_items
-    @order_products = Product.where(id: @order_list.map{|item| item.product_id }).map.with_index {|product, index| { product: product, quantity: @order_list[index][:quantity] } }
+    order_list = @order.line_items
+    @order_products = Product.where(id: order_list.map do |item|
+                                          item.product_id
+                                        end).map.with_index do |product, index|
+      { product:,
+        quantity: order_list[index][:quantity] }
+    end
   end
 
   def create
@@ -18,7 +20,6 @@ class OrdersController < ApplicationController
     else
       redirect_to cart_path, flash: { error: order.errors.full_messages.first }
     end
-
   rescue Stripe::CardError => e
     redirect_to cart_path, flash: { error: e.message }
   end
@@ -32,10 +33,10 @@ class OrdersController < ApplicationController
 
   def perform_stripe_charge
     Stripe::Charge.create(
-      source:      params[:stripeToken],
-      amount:      cart_subtotal_cents,
-      description: "Khurram Virani's Jungle Order",
-      currency:    'cad'
+      source: params[:stripeToken],
+      amount: cart_subtotal_cents,
+      description: current_user ? "#{current_user.first_name} #{current_user.last_name} Jungle Order" : "#{params[:stripeEmail]} Jungle Order",
+      currency: 'cad'
     )
   end
 
@@ -43,15 +44,15 @@ class OrdersController < ApplicationController
     order = Order.new(
       email: params[:stripeEmail],
       total_cents: cart_subtotal_cents,
-      stripe_charge_id: stripe_charge.id, # returned by stripe
+      stripe_charge_id: stripe_charge.id # returned by stripe
     )
 
     enhanced_cart.each do |entry|
       product = entry[:product]
       quantity = entry[:quantity]
       order.line_items.new(
-        product: product,
-        quantity: quantity,
+        product:,
+        quantity:,
         item_price: product.price,
         total_price: product.price * quantity
       )
@@ -59,5 +60,4 @@ class OrdersController < ApplicationController
     order.save!
     order
   end
-
 end

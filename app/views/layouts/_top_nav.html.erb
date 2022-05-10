@@ -1,4 +1,3 @@
-
 <header class="<%= current_page?(root_path) ? "hero" : "hero small" %>">
   <section class="title">
     <h3>Welcome to</h3>
@@ -31,18 +30,18 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           > %>
-            <%# Categories %>
-          <%# </a>
+        <%# Categories %>
+        <%# </a>
           <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown"> %>
-            <% Category.all.each do |category| %>
-            <li class="nav-item">
-              <%= link_to category.name, category, class: "nav-link" %>
-            </li>
-            <% end %>
-            <li class="nav-item">
-              <%= link_to "About Us", "/about", class: "nav-link text-white" %>
-            </li>
-          <%# </ul>
+        <% Category.all.each do |category| %>
+          <li class="nav-item">
+            <%= link_to category.name, category, class: "nav-link" %>
+          </li>
+        <% end %>
+        <li class="nav-item">
+          <%= link_to "About Us", "/about", class: "nav-link text-white" %>
+        </li>
+        <%# </ul>
         </li> %>
       </ul>
       <ul class="navbar-nav">
@@ -55,15 +54,14 @@
               <%= link_to "Logout", '/logout', class: "nav-link text-danger" %>
             </li>
           <% else %>
-          <li class="nav-item">
-            <%= link_to 'Login', '/login', class: "nav-link text-white" %> 
-          </li>
-          <li class="nav-item">
-            <%= link_to 'Signup', '/signup', class: "nav-link text-white" %>
-          </li>
+            <li class="nav-item">
+              <%= link_to 'Login', '/login', class: "nav-link text-white" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Signup', '/signup', class: "nav-link text-white" %>
+            </li>
           <% end %>
         </li>
-
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle text-danger"
@@ -83,28 +81,28 @@
         </li>
         <li class="nav-item end-0">
           <%= link_to cart_path, class: "nav-link " do %> <%= fa_icon "shopping-cart" %>
-          My Cart (<%= cart.size %>) <% end %>
+            My Cart (<%= cart.size %>) <% end %>
         </li>
       </ul>
     </div>
   </div>
 </nav>
 <script>
-(function(){
-const gnr = () => {
-    const uptitle = document.querySelector("section.title h3");
-    const subtitle = document.querySelector("section.title h2");
-    const header = document.querySelector("header.hero");
+  (function(){
+  const gnr = () => {
+      const uptitle = document.querySelector("section.title h3");
+      const subtitle = document.querySelector("section.title h2");
+      const header = document.querySelector("header.hero");
 
-    uptitle.style.fontSize = "5em";
-    uptitle.style.fontWeight = 900;
-    uptitle.style.textAlign = "center";
+      uptitle.style.fontSize = "5em";
+      uptitle.style.fontWeight = 900;
+      uptitle.style.textAlign = "center";
 
-    subtitle.innerHTML =
-      "<p>Watch it bring you to your</p><p> shu-n-n-n-n-n-n-n-n knees, knees!</p>";
-  };
-  const title = document.querySelector("header.hero");
-  title.addEventListener("dblclick", gnr);
-  
-})()
-  </script>
+      subtitle.innerHTML =
+        "<p>Watch it bring you to your</p><p> shu-n-n-n-n-n-n-n-n knees, knees!</p>";
+    };
+    const title = document.querySelector("header.hero");
+    title.addEventListener("dblclick", gnr);
+
+  })()
+</script>
