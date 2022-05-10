@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
-
   get 'static_pages/help'
   get 'static_pages/faq'
   get 'static_pages/about'
   root to: 'products#index'
 
-  resources :products, only: [:index, :show]
+  resources :products, only: %i[index show]
   resources :categories, only: [:show]
 
   resource :cart, only: [:show] do
@@ -13,9 +12,9 @@ Rails.application.routes.draw do
     post   :remove_item
   end
 
-  resources :orders, only: [:create, :show]
+  resources :orders, only: %i[create show]
   resources :about, only: [:index]
-  
+
   get '/signup', to: 'users#new'
   post '/users', to: 'users#create'
 
@@ -23,11 +22,10 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
 
-
   namespace :admin do
     root to: 'dashboard#show'
-    resources :products, except: [:edit, :update, :show]
-    resources :categories, except: [:edit, :update, :show]
+    resources :products, except: %i[edit update show]
+    resources :categories, only: %i[index new create]
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
