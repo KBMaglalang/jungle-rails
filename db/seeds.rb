@@ -21,6 +21,14 @@ end
 
 # Let's do this ...
 
+## USERS
+
+puts 'Creating base user ...'
+
+User.destroy_all
+User.create!({ first_name: 'user-admin', last_name: 'user-admin', email: ENV['USER_EMAIL'],
+               password: ENV['USER_PASSWORD'], password_confirmation: ENV['USER_PASSWORD'], admin_status: true })
+
 ## CATEGORIES
 
 puts 'Finding or Creating Categories ...'
